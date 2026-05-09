@@ -24,37 +24,3 @@ export interface Photo {
   featured: boolean;
 }
 
-export type MusicKind = 'track' | 'album' | 'playlist' | 'artist';
-export type MusicStatus = 'now' | 'favorite' | 'archive';
-
-export interface MusicEntry {
-  id: string;
-  title: string;
-  artist: string;
-  kind: MusicKind;
-  status: MusicStatus;
-  url: string | null;
-  coverUrl: string | null;
-  note: string | null;
-  addedAt: string; // ISO date
-}
-
-export type ArticleStatus = 'draft' | 'published' | 'archived';
-
-export interface ArticleSummary {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  publishedAt: string; // ISO date
-  coverUrl: string | null;
-  coverAlt: string | null;
-  tags: string[];
-  readingTime: number | null;
-  status: ArticleStatus;
-}
-
-export interface Article extends ArticleSummary {
-  /** Markdown content rendered from Notion blocks via notion-to-md. */
-  markdown: string;
-}
