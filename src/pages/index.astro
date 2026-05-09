@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getBio } from '../lib/cms/bio';
 
-let bio = { name: 'Luciano Sottile', tagline: null as string | null, body: null as string | null };
+let bio = { name: 'Luciano Sottile', tagline: null as string | null, bodyHtml: null as string | null };
 try {
   bio = await getBio();
 } catch (err) {
@@ -20,10 +20,8 @@ try {
       {bio.tagline && <p class="bio-tagline">{bio.tagline}</p>}
     </header>
 
-    {bio.body && (
-      <div class="bio-body">
-        <p>{bio.body}</p>
-      </div>
+    {bio.bodyHtml && (
+      <div class="bio-body" set:html={bio.bodyHtml} />
     )}
 
     <div class="bio-links">

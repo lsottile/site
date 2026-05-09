@@ -1,10 +1,11 @@
-import { queryAll } from '../notion';
+import { marked } from 'marked';
+import { queryAll, pageToMarkdown } from '../notion';
 import { plainText, plainTextOrNull } from './map';
 
 export interface BioData {
   name: string;
   tagline: string | null;
-  body: string | null;
+  bodyHtml: string | null;
 }
 
 export async function getBio(): Promise<BioData> {
@@ -17,9 +18,14 @@ export async function getBio(): Promise<BioData> {
   const page = pages[0];
   const props = page.properties;
 
+  const markdown = await pageToMarkdown(page.id);
+  const bodyHtml = markdown.trim()
+    ? (await marked.parse(markdown))
+    : null;
+
   return {
     name: plainText(props['title'], 'title'),
     tagline: plainTextOrNull(props['tagline']),
-    body: plainTextOrNull(props['body']),
+    bodyHtml,
   };
 }
