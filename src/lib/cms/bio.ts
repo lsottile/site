@@ -1,10 +1,10 @@
-import { queryAll, pageToMarkdown } from '../notion';
+import { queryAll } from '../notion';
 import { plainText, plainTextOrNull } from './map';
 
 export interface BioData {
   name: string;
   tagline: string | null;
-  markdown: string;
+  body: string | null;
 }
 
 export async function getBio(): Promise<BioData> {
@@ -20,6 +20,6 @@ export async function getBio(): Promise<BioData> {
   return {
     name: plainText(props['title'], 'title'),
     tagline: plainTextOrNull(props['tagline']),
-    markdown: await pageToMarkdown(page.id),
+    body: plainTextOrNull(props['body']),
   };
 }

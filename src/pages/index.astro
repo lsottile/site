@@ -1,17 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Prose from '../components/Prose.astro';
 import { getBio } from '../lib/cms/bio';
-import { marked } from 'marked';
 
-let bio = { name: 'Luciano Sottile', tagline: null as string | null, markdown: '' };
+let bio = { name: 'Luciano Sottile', tagline: null as string | null, body: null as string | null };
 try {
   bio = await getBio();
 } catch (err) {
   console.error('[bio] Failed to fetch from Notion:', err);
 }
-
-const bodyHtml = bio.markdown ? marked.parse(bio.markdown) : '';
 ---
 
 <BaseLayout
@@ -24,11 +20,9 @@ const bodyHtml = bio.markdown ? marked.parse(bio.markdown) : '';
       {bio.tagline && <p class="bio-tagline">{bio.tagline}</p>}
     </header>
 
-    {bodyHtml && (
+    {bio.body && (
       <div class="bio-body">
-        <Prose>
-          <Fragment set:html={bodyHtml} />
-        </Prose>
+        <p>{bio.body}</p>
       </div>
     )}
 
