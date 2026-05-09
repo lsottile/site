@@ -41,6 +41,16 @@
 /* Base */
 :root { color-scheme: light; }
 
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg:       #1C0F08;
+  --color-bg-soft:  #2C1810;
+  --color-fg:       #FFF0E2;
+  --color-fg-muted: #C4956A;
+  --color-accent:   #D4703A;
+  --color-accent-hi: #F2A05A;
+}
+
 html,
 body {
   background-color: var(--color-bg);

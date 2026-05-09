@@ -3,7 +3,6 @@ import {
   plainText,
   plainTextOrNull,
   selectOrNull,
-  lastEditedTime,
 } from './map';
 import type { NowSnapshot, Mood } from './types';
 
@@ -32,6 +31,6 @@ export async function getActiveNow(): Promise<NowSnapshot> {
     listening: plainTextOrNull(props['listening']),
     doing: plainTextOrNull(props['doing']),
     mood: selectOrNull<Mood>(props['mood'], MOODS),
-    updatedAt: lastEditedTime(props['updatedat'], 'updatedat'),
+    updatedAt: page.last_edited_time,
   };
 }
