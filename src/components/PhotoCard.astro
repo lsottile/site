@@ -1,0 +1,55 @@
+---
+import type { Photo } from '../lib/cms/types';
+
+interface Props {
+  photo: Photo;
+  loading?: 'eager' | 'lazy';
+}
+
+const { photo, loading = 'lazy' } = Astro.props;
+---
+
+<figure class="photo-card">
+  <img
+    src={photo.url}
+    alt={photo.alt}
+    width={photo.width}
+    height={photo.height}
+    loading={loading}
+    decoding="async"
+    class="photo-img"
+  />
+  {(photo.title || photo.location) && (
+    <figcaption class="photo-caption">
+      {photo.title}
+      {photo.location && <span class="photo-location"> · {photo.location}</span>}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .photo-card {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .photo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-card);
+    object-fit: cover;
+  }
+
+  .photo-caption {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-fg-muted);
+  }
+
+  .photo-location {
+    opacity: 0.7;
+  }
+</style>

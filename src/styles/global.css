@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  /* Warm palette */
+  --color-cream: #FFF0E2;
+  --color-peach: #FFD2A6;
+  --color-amber: #F2A05A;
+  --color-rust:  #B75B2A;
+  --color-cocoa: #3B1F14;
+
+  /* Semantic aliases */
+  --color-bg:        var(--color-cream);
+  --color-bg-soft:   #FFE7D2;
+  --color-fg:        var(--color-cocoa);
+  --color-fg-muted:  #6B4232;
+  --color-accent:    var(--color-rust);
+  --color-accent-hi: var(--color-amber);
+
+  /* Typography */
+  --font-serif: 'Newsreader', ui-serif, Georgia, serif;
+  --font-sans:  'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:  ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Type scale (mobile-first; modular ratio ~1.2) */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+
+  /* Layout */
+  --container-prose: 38rem;
+  --container-page:  44rem;
+
+  --radius-card: 0.75rem;
+}
+
+/* Base */
+:root { color-scheme: light; }
+
+html,
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+a {
+  color: var(--color-accent);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--color-accent-hi);
+}

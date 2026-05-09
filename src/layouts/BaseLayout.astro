@@ -1,0 +1,59 @@
+---
+import '../styles/global.css';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Luciano Sottile — life, photos, music, words.',
+  ogImage,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Luciano Sottile</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={`${title} — Luciano Sottile`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page-shell">
+      <SiteNav />
+      <main class="page-main">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>
+
+<style>
+  .page-shell {
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .page-main {
+    margin-top: 3rem;
+  }
+</style>

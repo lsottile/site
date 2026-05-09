@@ -1,0 +1,66 @@
+---
+export const prerender = false;
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NowSection from '../components/NowSection.astro';
+import { getActiveNow } from '../lib/cms/now';
+import type { NowSnapshot } from '../lib/cms/types';
+
+let snapshot: NowSnapshot | null = null;
+let error = false;
+
+try {
+  snapshot = await getActiveNow();
+} catch (err) {
+  error = true;
+  console.error('[now] Failed to fetch from Notion:', err);
+  Astro.response.status = 500;
+}
+---
+
+<BaseLayout
+  title="Now"
+  description="What Luciano is up to right now — location, listening, doing."
+>
+  <div class="now-page">
+    <header class="page-header">
+      <h1>Now</h1>
+      <p class="page-subtitle">A snapshot of what I'm up to at this moment.</p>
+    </header>
+
+    {error && (
+      <p class="empty-state">This page is being updated — check back in a moment.</p>
+    )}
+
+    {snapshot && <NowSection snapshot={snapshot} />}
+  </div>
+</BaseLayout>
+
+<style>
+  .now-page {
+    max-width: var(--container-prose);
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-header h1 {
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--color-fg-muted);
+    margin: 0;
+  }
+
+  .empty-state {
+    font-family: var(--font-sans);
+    color: var(--color-fg-muted);
+    font-size: var(--text-base);
+  }
+</style>

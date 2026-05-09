@@ -1,0 +1,118 @@
+---
+import type { NowSnapshot } from '../lib/cms/types';
+
+interface Props {
+  snapshot: NowSnapshot;
+}
+
+const { snapshot } = Astro.props;
+
+const MOOD_EMOJI: Record<string, string> = {
+  calm:      '🌿',
+  restless:  '⚡',
+  curious:   '🔭',
+  tired:     '🌙',
+  inspired:  '✨',
+};
+
+function relativeTime(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const hours = Math.floor(diff / 3_600_000);
+  if (hours < 1) return 'just now';
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d ago`;
+  const months = Math.floor(days / 30);
+  return `${months}mo ago`;
+}
+---
+
+<section class="now-section" aria-label="What I'm up to now">
+  <div class="now-grid">
+    <div class="now-block">
+      <span class="now-label">Where</span>
+      <p class="now-value">{snapshot.location}</p>
+    </div>
+
+    {snapshot.listening && (
+      <div class="now-block">
+        <span class="now-label">Listening</span>
+        <p class="now-value">{snapshot.listening}</p>
+      </div>
+    )}
+
+    {snapshot.doing && (
+      <div class="now-block">
+        <span class="now-label">Doing</span>
+        <p class="now-value">{snapshot.doing}</p>
+      </div>
+    )}
+  </div>
+
+  <div class="now-meta">
+    {snapshot.mood && (
+      <span class="mood-badge">
+        {MOOD_EMOJI[snapshot.mood]} {snapshot.mood}
+      </span>
+    )}
+    <span class="now-updated">Updated {relativeTime(snapshot.updatedAt)}</span>
+  </div>
+</section>
+
+<style>
+  .now-section {
+    padding: 2rem;
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-card);
+  }
+
+  .now-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .now-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .now-label {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+  }
+
+  .now-value {
+    margin: 0;
+    font-size: var(--text-lg);
+  }
+
+  .now-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-fg-muted);
+  }
+
+  .mood-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--color-peach);
+    border-radius: 999px;
+    font-weight: 600;
+    color: var(--color-cocoa);
+  }
+
+  .now-updated {
+    opacity: 0.7;
+  }
+</style>
