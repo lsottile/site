@@ -1,32 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Prose from '../components/Prose.astro';
+import { getBio } from '../lib/cms/bio';
+import { marked } from 'marked';
+
+let bio = { name: 'Luciano Sottile', tagline: null as string | null, markdown: '' };
+try {
+  bio = await getBio();
+} catch (err) {
+  console.error('[bio] Failed to fetch from Notion:', err);
+}
+
+const bodyHtml = bio.markdown ? marked.parse(bio.markdown) : '';
 ---
 
 <BaseLayout
   title="Bio"
-  description="Luciano Sottile — developer, nomad, traveling Europe with his girlfriend."
+  description={bio.tagline ?? 'Luciano Sottile — developer, nomad, traveling Europe.'}
 >
   <article class="bio">
     <header class="bio-header">
-      <h1 class="bio-name">Luciano Sottile</h1>
-      <p class="bio-tagline">Developer &amp; nomad. Traveling Europe.</p>
+      <h1 class="bio-name">{bio.name}</h1>
+      {bio.tagline && <p class="bio-tagline">{bio.tagline}</p>}
     </header>
 
-    <div class="bio-body">
-      <p>
-        I'm a developer based wherever my suitcase lands. Right now I'm somewhere in Europe
-        with my girlfriend, figuring out cities one coffee at a time.
-      </p>
-      <p>
-        I care a lot about good design, clean code, and things that are built to last.
-        When I'm not at a laptop I'm usually watching football, listening to Oasis,
-        or hunting for a decent vintage jacket.
-      </p>
-      <p>
-        This site is my small corner of the internet — a place to share what I'm up to,
-        photos from the road, music I love, and the occasional long-form thought.
-      </p>
-    </div>
+    {bodyHtml && (
+      <div class="bio-body">
+        <Prose>
+          <Fragment set:html={bodyHtml} />
+        </Prose>
+      </div>
+    )}
 
     <div class="bio-links">
       <a href="/now">What I'm doing now &rarr;</a>

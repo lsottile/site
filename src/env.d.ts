@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly NOTION_TOKEN: string;
+  readonly NOTION_DB_BIO: string;
   readonly NOTION_DB_NOW: string;
   readonly NOTION_DB_PHOTOS: string;
   readonly NOTION_DB_MUSIC: string;
