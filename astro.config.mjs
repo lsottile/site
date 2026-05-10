@@ -4,7 +4,7 @@ import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  output: 'static',
+  output: 'server',
   site: 'https://lucianosottile.xyz',
   adapter: vercel({
     isr: {
