@@ -2,7 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 
-const ALLOWED_PATHS = /^(\/now|\/articles(\/[^/]+)?)$/;
+const ALLOWED_PATHS = /^(\/$|\/now|\/articles(\/[^/]+)?)$/;
 
 export const POST: APIRoute = async ({ request }) => {
   const token = import.meta.env.REVALIDATE_TOKEN;
@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const rawPaths = Array.isArray((body as { paths?: unknown }).paths)
     ? ((body as { paths: unknown[] }).paths as unknown[])
-    : ['/now'];
+    : ['/', '/now'];
 
   const paths = rawPaths
     .filter((p): p is string => typeof p === 'string' && ALLOWED_PATHS.test(p));
