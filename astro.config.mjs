@@ -7,10 +7,6 @@ export default defineConfig({
   output: 'server',
   site: 'https://lucianosottile.xyz',
   adapter: vercel({
-    isr: {
-      bypassToken: process.env.REVALIDATE_TOKEN,
-      expiration: 60 * 60,
-    },
     imageService: true,
   }),
   vite: {
