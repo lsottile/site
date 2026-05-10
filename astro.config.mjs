@@ -8,6 +8,9 @@ export default defineConfig({
   site: 'https://lucianosottile.xyz',
   adapter: vercel({
     imageService: true,
+    isr: {
+      expiration: 60 * 30,
+    },
   }),
   vite: {
     plugins: [tailwindcss()],
