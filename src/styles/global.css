@@ -70,3 +70,26 @@ a {
 a:hover {
   color: var(--color-accent-hi);
 }
+
+/* Shared page layout */
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: var(--text-4xl);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 0.5rem;
+}
+
+.page-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-fg-muted);
+  margin: 0;
+}
+
+.empty-state {
+  color: var(--color-fg-muted);
+  font-size: var(--text-base);
+}

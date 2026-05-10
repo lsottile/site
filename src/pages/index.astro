@@ -15,9 +15,9 @@ try {
   description={bio.tagline ?? 'Luciano Sottile — developer, nomad, traveling Europe.'}
 >
   <article class="bio">
-    <header class="bio-header">
-      <h1 class="bio-name">{bio.name}</h1>
-      {bio.tagline && <p class="bio-tagline">{bio.tagline}</p>}
+    <header class="page-header">
+      <h1>{bio.name}</h1>
+      {bio.tagline && <p class="page-subtitle">{bio.tagline}</p>}
     </header>
 
     {bio.bodyHtml && (
@@ -35,24 +35,6 @@ try {
     max-width: var(--container-prose);
   }
 
-  .bio-header {
-    margin-bottom: 2rem;
-  }
-
-  .bio-name {
-    font-size: var(--text-4xl);
-    font-weight: 600;
-    line-height: 1.1;
-    margin: 0 0 0.5rem;
-  }
-
-  .bio-tagline {
-    font-family: var(--font-sans);
-    font-size: var(--text-lg);
-    color: var(--color-fg-muted);
-    margin: 0;
-  }
-
   .bio-body {
     display: flex;
     flex-direction: column;
@@ -67,7 +49,6 @@ try {
 
   .bio-links {
     margin-top: 2.5rem;
-    font-family: var(--font-sans);
     font-size: var(--text-sm);
     font-weight: 600;
   }
