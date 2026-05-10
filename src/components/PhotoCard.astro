@@ -12,9 +12,7 @@ const { photo, loading = 'lazy' } = Astro.props;
 <figure class="photo-card">
   <img
     src={photo.url}
-    alt={photo.alt}
-    width={photo.width}
-    height={photo.height}
+    alt={[photo.title, photo.location].filter(Boolean).join(' — ')}
     loading={loading}
     decoding="async"
     class="photo-img"
@@ -37,7 +35,7 @@ const { photo, loading = 'lazy' } = Astro.props;
 
   .photo-img {
     width: 100%;
-    height: auto;
+    aspect-ratio: 3 / 2;
     display: block;
     border-radius: var(--radius-card);
     object-fit: cover;

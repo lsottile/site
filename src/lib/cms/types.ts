@@ -14,10 +14,8 @@ export type Album = 'travel' | 'street' | 'mountains' | 'cities' | 'misc';
 export interface Photo {
   id: string;
   title: string;
+  publicId: string;
   url: string;
-  width: number;
-  height: number;
-  alt: string;
   location: string | null;
   takenAt: string; // ISO date
   album: Album | null;
