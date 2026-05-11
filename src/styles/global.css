@@ -1,7 +1,28 @@
 @import "tailwindcss";
-@import "@fontsource/newsreader/latin-400.css";
-@import "@fontsource/newsreader/latin-400-italic.css";
-@import "@fontsource/newsreader/latin-600.css";
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader-latin-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader-latin-600-normal.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: optional;
+}
 
 @theme {
   /* Warm palette */
