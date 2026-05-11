@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@astrojs/vercel": "^10.0.6",
+    "@fontsource/newsreader": "^5.2.10",
     "@notionhq/client": "^2.3.0",
     "astro": "^6.3.1",
     "marked": "^18.0.3",

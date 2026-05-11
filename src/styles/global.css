@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "@fontsource/newsreader/latin-400.css";
+@import "@fontsource/newsreader/latin-400-italic.css";
+@import "@fontsource/newsreader/latin-600.css";
 
 @theme {
   /* Warm palette */
